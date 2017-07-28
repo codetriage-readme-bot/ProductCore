@@ -1,0 +1,19 @@
+{
+    "name": "ruffle-labs/product-core",
+    "description": "Product catalogue for your Laravel application",
+    "type": "laravel-plugin",
+    "license": "MIT",
+    "keywords": ["laravel", "e-commerce"],
+    "authors": [
+        {
+            "name": "Ben Clayton",
+            "email": "Ben@benclayton.me"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "RuffleLabs\\ProductCore\\": "src/"
+        }
+    }
+}
