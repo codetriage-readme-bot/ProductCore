@@ -15,7 +15,6 @@ class PricingTest extends TestCase
     public function a_product_will_have_a_price()
     {
         $price = createAProduct()->price;
-
         $this->assertInternalType('string', $price, 'Price is not a string, assumed no price');
     }
 

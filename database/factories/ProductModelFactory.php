@@ -1,7 +1,8 @@
 <?php
 
 /** Product Core */
-$factory->define(RuffleLabs\ProductCore\Models\Product::class, function(Faker\Generator $faker) {
+$factory->define(RuffleLabs\ProductCore\Models\Product::class, function(Faker\Generator $faker)
+{
 
     return [
         'title' => ucfirst($faker->word),
@@ -12,8 +13,10 @@ $factory->define(RuffleLabs\ProductCore\Models\Product::class, function(Faker\Ge
         'updated_at' => $faker->dateTime(),
     ];
 });
-$factory->state(RuffleLabs\ProductCore\Models\Product::class, 'randomly_publish', function($faker) {
+$factory->state(RuffleLabs\ProductCore\Models\Product::class, 'randomly_publish', function($faker)
+{
     $published_at = rand(0, 9) < 8 ? $faker->dateTime() : NULL;
+
     return [
         'published_at' => $published_at,
     ];

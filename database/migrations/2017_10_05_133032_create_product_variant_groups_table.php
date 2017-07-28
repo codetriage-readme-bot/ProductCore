@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductCostsTable extends Migration
+class CreateProductVariantGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateProductCostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_costs', function (Blueprint $table) {
+        Schema::create('product_variant_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->decimal('price', 10, 2);
+            $table->string('name');
             $table->timestamps();
-
-
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -31,10 +28,6 @@ class CreateProductCostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_costs', function (Blueprint $table) {
-            $table->dropForeign(['product_id']);
-        });
-
-        Schema::dropIfExists('product_costs');
+        Schema::dropIfExists('product_variant_groups');
     }
 }

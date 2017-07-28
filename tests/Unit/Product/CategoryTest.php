@@ -68,7 +68,8 @@ class CategoryTest extends TestCase
         $product->assignCategory($topLevelCategory);
         $product->assignCategory(createASubCategory(1));
 
-        $topLevelCategory = ProductCategory::find($topLevelCategory->id);
+        $topLevelCategory = $product->categories()->first();
+
         $subCategories = $topLevelCategory->children();
 
         $this->assertInstanceOf(\RuffleLabs\ProductCore\Models\ProductCategory::class, $subCategories->first());
@@ -100,5 +101,22 @@ class CategoryTest extends TestCase
         $topLevelCategory = $subCategory->parent();
 
         $this->assertInstanceOf(\RuffleLabs\ProductCore\Models\ProductCategory::class, $topLevelCategory);
+    }
+
+    /** @test */
+    public function a_product_retrieving_categories_should_not_retrieve_sub_categories()
+    {
+        $product = createAProduct();
+
+        $topLevelCategory = createACategory();
+        $product->assignCategory($topLevelCategory);
+        $product->assignCategory(createASubCategory(1));
+
+        $categories = $product->categories;
+
+        foreach ($categories as $category)
+        {
+            $this->assertEquals(NULL, $category->pluck('parent_id'), 'Categories should only return categories without a parentId');
+        }
     }
 }

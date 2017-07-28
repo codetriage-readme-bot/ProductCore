@@ -10,20 +10,25 @@ trait PublishedTrait
      * @param $publish Boolean
      * @return $this
      */
-    public function publish($publish = true)
+    public function publish($publish = false)
     {
-        if(!$this->hasCategory()){
-            abort('500', 'A product needs a category to be published');
+        if(is_null($publish) || !$publish){
+            $this->published_at = null;
         }
-      
+
         if ($this->isPublished() && $publish) {
             return $this->published_at;
         }
 
+        if ($publish) {
         if (!$publish) {
             $this->published_at = null;
         } elseif ($publish || is_null($publish)) {
             $this->published_at = Carbon::now()->toDateTimeString();
+        }
+
+        if(!$this->hasCategory()){
+            abort('500', 'A product needs a category to be published');
         }
 
         return $this->published_at;

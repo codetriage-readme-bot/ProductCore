@@ -4,18 +4,24 @@ namespace RuffleLabs\ProductCore\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+use RuffleLabs\ProductCore\Traits\ImageConversions;
 use RuffleLabs\ProductCore\Traits\PublishedTrait;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
-class Product extends Model
+class Product extends Model implements HasMediaConversions
 {
+    use HasMediaTrait;
     use PublishedTrait;
     use SoftDeletes;
+    use ImageConversions;
 
     protected $dates = ['deleted_at'];
 
     protected $table = 'products';
 
-    protected $guarded = [];
+    protected $fillable = ['title', 'description'];
 
     protected $with = ['categories'];
 
@@ -26,13 +32,34 @@ class Product extends Model
         return $this->hasOne('RuffleLabs\ProductCore\Models\ProductCost');
     }
 
+    public function variantGroups()
+    {
+        return $this->hasMany('RuffleLabs\ProductCore\Models\ProductVariantGroups');
+    }
+
     public function categories()
     {
         return $this->morphToMany('RuffleLabs\ProductCore\Models\ProductCategory',
             'product',
             'product_categories_xref',
             'product_id',
-            'category_id');
+            'category_id')
+            ->where('parent_id', '=', NULL);
+    }
+
+    public function subcategories()
+    {
+        return $this->morphToMany('RuffleLabs\ProductCore\Models\ProductCategory',
+            'product',
+            'product_categories_xref',
+            'product_id',
+            'category_id')
+            ->whereNotNull('parent_id');
+    }
+
+    public function images()
+    {
+        return $this->getMedia('product-images');
     }
 
     public function getPriceAttribute()
@@ -59,8 +86,33 @@ class Product extends Model
         return false;
     }
 
+    public function removeAllCategories()
+    {
+        DB::table('product_categories_xref')
+            ->where('product_id', $this->id)
+            ->delete();
+    }
+
+    public function assignCategories(array $categories = [])
+    {
+        foreach($categories as $categoryId) {
+            $category = ProductCategory::find($categoryId);
+            $this->assignCategory($category);
+        }
+    }
+
     public function assignCategory(ProductCategory $category)
     {
-        $this->categories()->save($category);
+        if(is_null($category->parent_id)){
+            return $this->assignSubCategory($category);
+        }
+        return $this->categories()->save($category);
     }
+
+    public function assignSubCategory(ProductCategory $category)
+    {
+        $this->subcategories()->save($category);
+    }
+
+
 }

@@ -2,7 +2,6 @@
 
 namespace RuffleLabs\ProductCore\Tests;
 
-use Guzzle\Service\Command\Factory\CompositeFactory;
 use RuffleLabs\ProductCore\Providers\CatalogueServiceProvider;
 use RuffleLabs\ProductCore\Providers\CoreServiceProvider;
 
