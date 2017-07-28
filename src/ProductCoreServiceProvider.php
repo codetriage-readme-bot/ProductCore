@@ -17,7 +17,7 @@ class ProductCoreServiceProvider extends ServiceProvider
             __DIR__ . '/config' => config_path(),
         ]);
 
-
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations/');
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductCoreServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/product.php', 'product-main'
+            __DIR__ . '/config/product.php', 'product'
         );
 
 

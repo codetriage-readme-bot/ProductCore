@@ -10,7 +10,9 @@
             "email": "Ben@benclayton.me"
         }
     ],
-    "require": {},
+    "require": {
+        "illuminate/support": "^5.4"
+    },
     "autoload": {
         "psr-4": {
             "RuffleLabs\\ProductCore\\": "src/"
