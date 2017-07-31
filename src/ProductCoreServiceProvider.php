@@ -2,6 +2,7 @@
 
 namespace RuffleLabs\ProductCore;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class ProductCoreServiceProvider extends ServiceProvider
@@ -13,11 +14,11 @@ class ProductCoreServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/config' => config_path(),
-        ]);
+        $this->publishes([__DIR__ . '/../config' => config_path()]);
 
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations/');
+        if(Config::get('product.run_migrations')){
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations/');
+        }
     }
 
     /**
@@ -27,9 +28,7 @@ class ProductCoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/config/product.php', 'product'
-        );
+        $this->mergeConfigFrom(__DIR__ . '/../config/catalogue.php', 'catalogue');
 
 
     }
