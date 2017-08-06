@@ -21,7 +21,7 @@ class CoreServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      *
-     * @return void
+     * @return voidx
      */
     public function register()
     {
