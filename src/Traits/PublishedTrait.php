@@ -1,6 +1,6 @@
 <?php
 
-namespace RuffleLabs\ProductCore;
+namespace RuffleLabs\ProductCore\Traits;
 
 trait PublishedTrait
 {
@@ -27,11 +27,11 @@ trait PublishedTrait
      */
     public function isPublished()
     {
-        if(is_null($this->published_at)){
+        if(is_null($this->item->published_at)){
             return false;
         }
 
-        $publishedDate = new Carbon($this->published_at);
+        $publishedDate = new Carbon($this->item->published_at);
         if($publishedDate->gte(Carbon::now())){
             return true;
         }
