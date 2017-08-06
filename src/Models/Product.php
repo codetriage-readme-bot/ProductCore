@@ -2,8 +2,9 @@
 
 namespace RuffleLabs\ProductCore\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Product extends CatalogueItemBase
+class Product extends Model
 {
 
 }
