@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 7.1
+
+before_script:
+  - composer self-update
+  - composer install --no-interaction
+
+script:
+  - vendor/bin/phpunit
+
+addons:
+  code_climate:
+    repo_token:19b3e9c6f34454fa08fb6dd22c298928f4e224a8140b82bd3cd0aff3f17a8c5b
+
+after_success:
+  - vendor/bin/test-reporter
