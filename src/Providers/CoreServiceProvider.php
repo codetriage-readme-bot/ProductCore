@@ -1,11 +1,12 @@
 <?php
 
-namespace RuffleLabs\ProductCore;
+namespace RuffleLabs\ProductCore\Providers;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
-class ProductCoreServiceProvider extends ServiceProvider
+use RuffleLabs\ProductCore\Console\Commands\ProductCoreMigrationCommand;
+
+class CoreServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -15,10 +16,6 @@ class ProductCoreServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([__DIR__ . '/../config' => config_path()]);
-
-        if(Config::get('product.run_migrations')){
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations/');
-        }
     }
 
     /**
@@ -28,8 +25,10 @@ class ProductCoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/catalogue.php', 'catalogue');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/catalogue.php', 'catalogue');
 
-
+        $this->commands([
+            ProductCoreMigrationCommand::class,
+        ]);
     }
 }
