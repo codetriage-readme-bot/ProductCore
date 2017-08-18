@@ -10,8 +10,8 @@
          stopOnFailure="false"
          syntaxCheck="true">
     <testsuites>
-        <testsuite name="Package Feature Test Suite">
-            <directory suffix=".php">./tests/Feature/</directory>
+        <testsuite name="Ruffle Product Core Test Suite">
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
     <filter>

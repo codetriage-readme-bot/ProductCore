@@ -28,6 +28,7 @@
     "autoload-dev": {
         "psr-4": {
             "RuffleLabs\\ProductCore\\Tests\\": "tests/"
-        }
+        },
+        "files": ["tests/Utilities/ProductHelpers.php"]
     }
 }

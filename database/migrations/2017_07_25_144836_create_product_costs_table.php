@@ -31,6 +31,10 @@ class CreateProductCostsTable extends Migration
      */
     public function down()
     {
+        Schema::table('product_costs', function (Blueprint $table) {
+            $table->dropForeign(['product_id']);
+        });
+
         Schema::dropIfExists('product_costs');
     }
 }
