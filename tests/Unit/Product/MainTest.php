@@ -7,7 +7,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ServerResponseTest extends TestCase
+class MainTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -25,37 +25,6 @@ class ServerResponseTest extends TestCase
         $description = getAProduct(['description' => $actualDescription])->description;
 
         $this->assertTrue($description == $actualDescription, 'Description retrieved doesn\'t match description inputted');
-    }
-
-    /** @test */
-    public function a_product_will_have_a_price()
-    {
-        $price = getAProduct()->price;
-
-        $this->assertInternalType('string', $price, 'Price is not a string, assumed no price');
-    }
-
-    /** @test */
-    public function a_products_price_will_be_in_the_correct_price_format()
-    {
-        $price = getAProduct()->price;
-
-        $amountOfDecimalPlaces = strlen(str_after($price, '.'));
-
-        $this->assertEquals(2, $amountOfDecimalPlaces, 'Price does not have 2 decimal places');
-        $this->assertContains('£', $price, 'Price does not contain a £');
-    }
-    
-    /** @test */
-    public function a_products_price_can_be_updated(){
-        $newPrice = '5.00';
-        $product = getAProduct();
-
-        $product->price = $newPrice;
-
-        $price = Catalogue::products()->first()->price;
-
-        $this->assertEquals($newPrice, str_after($price, '£'), 'Price retrieved does not match price inputted');
     }
 
     /** @test */
