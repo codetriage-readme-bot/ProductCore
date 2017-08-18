@@ -16,7 +16,7 @@ class CreateProductCostsTable extends Migration
         Schema::create('product_costs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 7, 2);
             $table->timestamps();
 
 
@@ -31,10 +31,6 @@ class CreateProductCostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_costs', function (Blueprint $table) {
-            $table->dropForeign(['product_id']);
-        });
-
         Schema::dropIfExists('product_costs');
     }
 }
