@@ -14,7 +14,7 @@ class PricingTest extends TestCase
     /** @test */
     public function a_product_will_have_a_price()
     {
-        $price = getAProduct()->price;
+        $price = createAProduct()->price;
 
         $this->assertInternalType('string', $price, 'Price is not a string, assumed no price');
     }
@@ -22,7 +22,7 @@ class PricingTest extends TestCase
     /** @test */
     public function a_products_price_will_be_in_the_correct_price_format()
     {
-        $price = getAProduct()->price;
+        $price = createAProduct()->price;
 
         $amountOfDecimalPlaces = strlen(str_after($price, '.'));
 
@@ -33,7 +33,7 @@ class PricingTest extends TestCase
     /** @test */
     public function a_products_price_can_be_updated(){
         $newPrice = '5.00';
-        $product = getAProduct();
+        $product = createAProduct();
 
         $product->price = $newPrice;
 

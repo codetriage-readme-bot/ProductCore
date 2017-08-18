@@ -2,19 +2,24 @@
 
 namespace RuffleLabs\ProductCore\Traits;
 
+use Carbon\Carbon;
+
 trait PublishedTrait
 {
     /**
      * @param $publish Boolean
      * @return $this
      */
-    public function setPublishedDate(boolean $publish)
+    public function publish($publish = true)
     {
+        if($this->isPublished() && $publish){
+            return $this->published_at;
+        }
+
         if(!$publish){
             $this->published_at = null;
         }
-
-        if($publish && is_null($this->published_at)){
+        elseif($publish || is_null($publish)){
             $this->published_at = Carbon::now()->toDateTimeString();
         }
 
@@ -27,12 +32,12 @@ trait PublishedTrait
      */
     public function isPublished()
     {
-        if(is_null($this->item->published_at)){
+        if(is_null($this->published_at)){
             return false;
         }
 
-        $publishedDate = new Carbon($this->item->published_at);
-        if($publishedDate->gte(Carbon::now())){
+        $publishedDate = new Carbon($this->published_at);
+        if($publishedDate->lte(Carbon::now())){
             return true;
         }
         else{

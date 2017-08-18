@@ -4,9 +4,12 @@ namespace RuffleLabs\ProductCore\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use RuffleLabs\ProductCore\Traits\PublishedTrait;
 
 class Product extends Model
 {
+    use PublishedTrait;
+
     protected $table = 'products';
 
     protected $guarded = [];

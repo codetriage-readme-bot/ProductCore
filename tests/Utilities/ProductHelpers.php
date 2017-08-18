@@ -1,6 +1,6 @@
 <?php
 
-function getAProduct($attributes = []){
-    factory('RuffleLabs\ProductCore\Models\Product', 1)->create($attributes);
+function createAProduct($attributes = [], $amount = 1){
+    factory('RuffleLabs\ProductCore\Models\Product', $amount)->create($attributes);
     return \RuffleLabs\ProductCore\Facades\Catalogue::products()->first();
 }
