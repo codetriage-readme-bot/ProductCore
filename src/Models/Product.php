@@ -3,7 +3,6 @@
 namespace RuffleLabs\ProductCore\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use RuffleLabs\ProductCore\Traits\PublishedTrait;
 
@@ -21,7 +20,7 @@ class Product extends Model
     public function costs(){
         return $this->hasOne('RuffleLabs\ProductCore\Models\ProductCost');
     }
-    
+
     public function getPriceAttribute(){
         return $this->costs->currency . $this->costs->price;
     }
