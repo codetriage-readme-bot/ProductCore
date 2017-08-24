@@ -11,7 +11,7 @@
          syntaxCheck="true">
     <testsuites>
         <testsuite name="Ruffle Product Core Test Suite">
-            <directory>./tests/</directory>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
     <filter>

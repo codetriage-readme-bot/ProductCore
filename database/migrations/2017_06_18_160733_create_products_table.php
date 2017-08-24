@@ -32,8 +32,17 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        if(DB::getDriverName() == 'sqlite'){
+            $off = 'PRAGMA foreign_keys = OFF';
+            $on = 'PRAGMA foreign_keys = ON';
+        }
+        else{
+            $off = 'SET FOREIGN_KEY_CHECKS = 0';
+            $on = 'SET FOREIGN_KEY_CHECKS = 1';
+        }
+
+        DB::statement($off);
         Schema::dropIfExists('products');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        DB::statement($on);
     }
 }
