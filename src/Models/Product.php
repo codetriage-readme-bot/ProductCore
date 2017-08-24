@@ -4,11 +4,15 @@ namespace RuffleLabs\ProductCore\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use RuffleLabs\ProductCore\Traits\PublishedTrait;
 
 class Product extends Model
 {
     use PublishedTrait;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $table = 'products';
 
@@ -17,12 +21,7 @@ class Product extends Model
     public function costs(){
         return $this->hasOne('RuffleLabs\ProductCore\Models\ProductCost');
     }
-
-    public function getDescriptionHtmlAttribute()
-    {
-        return Markdown::convertToHtml($this->description);
-    }
-
+    
     public function getPriceAttribute(){
         return $this->costs->currency . $this->costs->price;
     }
