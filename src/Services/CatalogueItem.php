@@ -6,15 +6,15 @@ use RuffleLabs\ProductCore\Models\Product;
 
 class CatalogueItem
 {
-    protected $product;
+    protected $products;
 
-    public function __construct(Product $product)
+    public function __construct(Product $products)
     {
-        $this->product = $product;
+        $this->products = $products;
     }
 
-    public function testing()
+    public function products()
     {
-        return 'success';
+        return $this->products;
     }
 }
