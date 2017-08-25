@@ -20,9 +20,9 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->publishes([__DIR__ . '/../config' => config_path()]);
 
-        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
-        Product::created(function ($product) {
+        Product::created(function($product) {
             $productCost = new ProductCost([
                 'product_id' => $product->id,
                 'price' => '0.00'

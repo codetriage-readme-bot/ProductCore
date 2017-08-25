@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function(Faker\Generator $faker) {
     static $password;
 
     return [
@@ -25,7 +25,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
 /** Product Core */
 
-$factory->define(RuffleLabs\ProductCore\Models\Product::class, function (Faker\Generator $faker) {
+$factory->define(RuffleLabs\ProductCore\Models\Product::class, function(Faker\Generator $faker) {
 
     return [
         'title' => ucfirst($faker->word),
@@ -36,7 +36,7 @@ $factory->define(RuffleLabs\ProductCore\Models\Product::class, function (Faker\G
         'updated_at' => $faker->dateTime(),
     ];
 });
-$factory->state(RuffleLabs\ProductCore\Models\Product::class, 'randomly_publish', function ($faker) {
+$factory->state(RuffleLabs\ProductCore\Models\Product::class, 'randomly_publish', function($faker) {
     $published_at = rand(0, 9) < 8 ? $faker->dateTime() : NULL;
     return [
         'published_at' => $published_at,
