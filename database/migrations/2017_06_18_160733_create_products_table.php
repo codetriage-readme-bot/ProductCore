@@ -35,8 +35,7 @@ class CreateProductsTable extends Migration
         if (DB::getDriverName() == 'sqlite') {
             $off = 'PRAGMA foreign_keys = OFF';
             $on = 'PRAGMA foreign_keys = ON';
-        }
-        else {
+        } else {
             $off = 'SET FOREIGN_KEY_CHECKS = 0';
             $on = 'SET FOREIGN_KEY_CHECKS = 1';
         }

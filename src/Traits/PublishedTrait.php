@@ -18,8 +18,7 @@ trait PublishedTrait
 
         if (!$publish) {
             $this->published_at = null;
-        }
-        elseif ($publish || is_null($publish)) {
+        } elseif ($publish || is_null($publish)) {
             $this->published_at = Carbon::now()->toDateTimeString();
         }
 
@@ -39,8 +38,7 @@ trait PublishedTrait
         $publishedDate = new Carbon($this->published_at);
         if ($publishedDate->lte(Carbon::now())) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
