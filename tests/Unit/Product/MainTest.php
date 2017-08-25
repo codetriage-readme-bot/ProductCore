@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class MainTest extends TestCase
 {
     use DatabaseMigrations;
-    use DatabaseTransactions;
 
     /** @test */
     public function a_product_has_a_title(){
