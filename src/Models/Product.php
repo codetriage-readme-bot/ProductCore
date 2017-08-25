@@ -17,19 +17,19 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public function costs(){
+    public function costs() {
         return $this->hasOne('RuffleLabs\ProductCore\Models\ProductCost');
     }
 
-    public function getPriceAttribute(){
+    public function getPriceAttribute() {
         return $this->costs->currency . $this->costs->price;
     }
 
-    public function getPriceRawAttribute(){
+    public function getPriceRawAttribute() {
         return $this->costs->price;
     }
 
-    public function setPriceAttribute($price){
+    public function setPriceAttribute($price) {
         $this->costs->price = $price;
         $this->costs->save();
     }

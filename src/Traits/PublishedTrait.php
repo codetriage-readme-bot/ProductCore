@@ -12,14 +12,14 @@ trait PublishedTrait
      */
     public function publish($publish = true)
     {
-        if($this->isPublished() && $publish){
+        if ($this->isPublished() && $publish) {
             return $this->published_at;
         }
 
-        if(!$publish){
+        if (!$publish) {
             $this->published_at = null;
         }
-        elseif($publish || is_null($publish)){
+        elseif ($publish || is_null($publish)) {
             $this->published_at = Carbon::now()->toDateTimeString();
         }
 
@@ -32,15 +32,15 @@ trait PublishedTrait
      */
     public function isPublished()
     {
-        if(is_null($this->published_at)){
+        if (is_null($this->published_at)) {
             return false;
         }
 
         $publishedDate = new Carbon($this->published_at);
-        if($publishedDate->lte(Carbon::now())){
+        if ($publishedDate->lte(Carbon::now())) {
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
