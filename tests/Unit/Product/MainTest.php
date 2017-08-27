@@ -55,6 +55,7 @@ class MainTest extends TestCase
         createAProduct();
 
         $product = Catalogue::products()->find(1);
+        $product->assignCategory(createACategory());
 
         $this->assertEquals(NULL, $product->published_at, 'Published at should be Null');
 
@@ -69,6 +70,7 @@ class MainTest extends TestCase
         createAProduct();
 
         $product = Catalogue::products()->find(1);
+        $product->assignCategory(createACategory());
 
         $this->assertEquals(NULL, $product->published_at, 'Published at should be Null');
 

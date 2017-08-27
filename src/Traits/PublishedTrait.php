@@ -12,6 +12,10 @@ trait PublishedTrait
      */
     public function publish($publish = true)
     {
+        if(!$this->hasCategory()){
+            abort('500', 'A product needs a category to be published');
+        }
+      
         if ($this->isPublished() && $publish) {
             return $this->published_at;
         }
