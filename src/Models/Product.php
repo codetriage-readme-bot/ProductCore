@@ -21,7 +21,6 @@ class Product extends Model
 
     private $categoryService;
 
-
     public function costs()
     {
         return $this->hasOne('RuffleLabs\ProductCore\Models\ProductCost');
