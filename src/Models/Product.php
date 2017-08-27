@@ -17,20 +17,51 @@ class Product extends Model
 
     protected $guarded = [];
 
-    public function costs(){
+    protected $with = ['categories'];
+
+    private $categoryService;
+
+
+    public function costs()
+    {
         return $this->hasOne('RuffleLabs\ProductCore\Models\ProductCost');
     }
 
-    public function getPriceAttribute(){
+    public function categories()
+    {
+        return $this->morphToMany('RuffleLabs\ProductCore\Models\ProductCategory',
+            'product',
+            'product_categories_xref',
+            'product_id',
+            'category_id');
+    }
+
+    public function getPriceAttribute()
+    {
         return $this->costs->currency . $this->costs->price;
     }
 
-    public function getPriceRawAttribute(){
+    public function getPriceRawAttribute()
+    {
         return $this->costs->price;
     }
 
-    public function setPriceAttribute($price){
+    public function setPriceAttribute($price)
+    {
         $this->costs->price = $price;
         $this->costs->save();
+    }
+
+    public function hasCategory()
+    {
+        if($this->categories()->count() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public function assignCategory(ProductCategory $category)
+    {
+        $this->categories()->save($category);
     }
 }
