@@ -3,6 +3,7 @@
 !!! STILL IN ACTIVE DEVELOPMENT !!!
 
 [![Build Status](https://travis-ci.org/RuffleLabs/ProductCore.svg?branch=develop)](https://travis-ci.org/RuffleLabs/ProductCore) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/RuffleLabs/ProductCore/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/RuffleLabs/ProductCore/?branch=master)
+[![Open Source Helpers](https://www.codetriage.com/rufflelabs/productcore/badges/users.svg)](https://www.codetriage.com/rufflelabs/productcore)
 
 A laravel e-commerce package, to help manage your inventory.
 
